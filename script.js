@@ -1,49 +1,46 @@
- class Animal {
-      constructor(species) {
-        this._species = species;
-      }
+class Animal {
+  constructor(species) {
+    this._species = species;
+  }
 
-      get species() {
-        return this._species;
-      }
+  get species() {
+    return this._species;
+  }
 
-      makeSound() {
-        log(`The ${this.species} makes a sound`);
-      }
-    }
+  makeSound() {
+    log(`The ${this.species} makes a sound`);
+  }
+}
 
-    class Dog extends Animal {
-      bark() {
-        log("woof");
-      }
-    }
+class Dog extends Animal {
+  bark() {
+    log("woof");
+  }
+}
 
-    class Cat extends Animal {
-      purr() {
-        log("purr");
-      }
-    }
+class Cat extends Animal {
+  purr() {
+    log("purr");
+  }
+}
 
-    // Attach to window (as required)
-    window.Animal = Animal;
-    window.Dog = Dog;
-    window.Cat = Cat;
+function log(message) {
+  document.getElementById("output").textContent += message + "\n";
+}
 
-    // Logging helper
-    function log(message) {
-      const output = document.getElementById('logOutput');
-      output.textContent += message + '\n';
-    }
+document.getElementById("testCatBtn").addEventListener("click", () => {
+  const cat = new Cat("Siamese");
+  cat.makeSound();
+  cat.purr();
+});
 
-    // Test functions
-    function testCat() {
-      const myCat = new Cat("Siamese");
-      myCat.makeSound();  // The Siamese makes a sound
-      myCat.purr();       // purr
-    }
+document.getElementById("testDogBtn").addEventListener("click", () => {
+  const dog = new Dog("Golden Retriever");
+  dog.makeSound();
+  dog.bark();
+});
 
-    function testDog() {
-      const myDog = new Dog("Golden Retriever");
-      myDog.makeSound();  // The Golden Retriever makes a sound
-      myDog.bark();       // woof
-    }
+// For Cypress testing
+window.Animal = Animal;
+window.Cat = Cat;
+window.Dog = Dog;
